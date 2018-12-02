@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- "reloadable" monitora as mudanças e reinicia a aplicação -->
+<!-- "path" definido para o mesmo valor do artifactId por convenção -->
+<Context path="/trabalho-pw-ii" reloadable="true">
+    <!-- Desabilita a persistência de sessão -->
+    <Manager pathname="" />
+</Context>
