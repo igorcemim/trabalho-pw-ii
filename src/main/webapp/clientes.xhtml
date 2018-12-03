@@ -15,7 +15,7 @@
             <ui:param name="nomePagina" value="Clientes" />
             <ui:define name="content">
                 <h:form>
-                    <p:messages autoUpdate="true" showDetail="true"></p:messages>
+                    <p:messages autoUpdate="true"></p:messages>
                     <p:panelGrid columns="2">
                         <h:outputLabel value="Tipo"></h:outputLabel>
                         <p:selectOneRadio id="tipo" value="#{clienteBean.elemento.tipo}">
@@ -48,9 +48,9 @@
                         <p:commandButton actionListener="#{clienteBean.salvar()}" update="@form" value="Salvar" />
 
                     </p:panelGrid>
-                    
+
                     <p:commandButton style="margin: 20px 0;" value="Atualizar" action="#{clienteBean.atualizar()}" update="@form" />
-                    
+
                     <p:dataTable value="#{clienteBean.lista}" var="cliente" emptyMessage="Nenhum cliente cadastrado.">
                         <p:column headerText="Ações">
                             <p:commandButton value="Editar" action="#{clienteBean.editar(cliente)}" update="@form" />
