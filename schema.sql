@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS proposta;
 DROP TABLE IF EXISTS cliente;
 
@@ -22,4 +23,10 @@ CREATE TABLE proposta (
     situacao varchar(30) DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (cliente_id) references cliente(id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+CREATE TABLE usuario (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    login varchar(30) NOT NULL,
+    senha varchar(64) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
