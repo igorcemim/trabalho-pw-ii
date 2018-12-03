@@ -28,5 +28,6 @@ CREATE TABLE proposta (
 CREATE TABLE usuario (
     id int(11) NOT NULL AUTO_INCREMENT,
     login varchar(30) NOT NULL,
-    senha varchar(64) NOT NULL
+    senha varchar(64) NOT NULL,
+    PRIMARY KEY(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
