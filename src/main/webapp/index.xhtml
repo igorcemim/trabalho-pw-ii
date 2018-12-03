@@ -19,14 +19,14 @@
                 </h:form>
 
                 <p:fieldset legend="Relatório de Clientes" style="margin-bottom:20px">
-                    <p:chart rendered="#{homeBean.relatorioClientes.size() > 0}" responsive="true" type="pie" model="#{homeBean.pieModel}" style="width:60%; height:300px; margin: 0 auto;" />
+                    <p:chart rendered="#{homeBean.relatorioClientes.size() > 0}" responsive="true" type="pie" model="#{homeBean.graficoTiposClientes}" style="width:60%; height:300px; margin: 0 auto;" />
                     <f:verbatim rendered="#{homeBean.relatorioClientes.size() == 0}">
                         <p>Nenhum cliente cadastrado.</p>
                     </f:verbatim>
                 </p:fieldset>
 
                 <p:fieldset legend="Relatório de Propostas" style="margin-bottom:20px">
-                    <p:chart rendered="#{homeBean.relatorioPropostas.size() > 0}" responsive="true" type="bar" model="#{homeBean.barModel}" style="width:60%; height:300px; margin: 0 auto;" />
+                    <p:chart rendered="#{homeBean.relatorioPropostas.size() > 0}" responsive="true" type="bar" model="#{homeBean.graficoSituacaoPropostas}" style="width:60%; height:300px; margin: 0 auto;" />
                     <f:verbatim rendered="#{homeBean.relatorioPropostas.size() == 0}">
                         <p>Nenhuma proposta cadastrada.</p>
                     </f:verbatim>

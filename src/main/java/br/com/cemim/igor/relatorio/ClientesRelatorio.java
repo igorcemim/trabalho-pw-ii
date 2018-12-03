@@ -1,10 +1,10 @@
-package br.com.cemim.igor.service;
+package br.com.cemim.igor.relatorio;
 
 import br.com.cemim.igor.entidade.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RelatorioClientesService {
+public class ClientesRelatorio {
 
     public class Resultado {
 

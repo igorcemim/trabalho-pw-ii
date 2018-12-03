@@ -3,8 +3,8 @@ package br.com.cemim.igor.controller;
 import br.com.cemim.igor.dao.ClienteDAO;
 import br.com.cemim.igor.dao.PropostaDAO;
 import br.com.cemim.igor.exception.ErroSistema;
-import br.com.cemim.igor.service.RelatorioClientesService;
-import br.com.cemim.igor.service.RelatorioPropostasService;
+import br.com.cemim.igor.relatorio.ClientesRelatorio;
+import br.com.cemim.igor.relatorio.PropostasRelatorio;
 import br.com.cemim.igor.util.MessageManager;
 import java.io.Serializable;
 import java.util.List;
@@ -20,11 +20,41 @@ import org.primefaces.model.chart.PieChartModel;
 @ViewScoped
 public class HomeBean implements Serializable {
 
-    private List<RelatorioClientesService.Resultado> relatorioClientes;
-    private List<RelatorioPropostasService.Resultado> relatorioPropostas;
-    private PieChartModel pieModel;
-    private HorizontalBarChartModel barModel;
+    private List<ClientesRelatorio.Resultado> relatorioClientes;
+    private List<PropostasRelatorio.Resultado> relatorioPropostas;
+    private PieChartModel graficoTiposClientes;
+    private HorizontalBarChartModel graficoSituacaoPropostas;
     private MessageManager messageManager;
+
+    private void criarGraficoTiposClientes() {
+        graficoTiposClientes = new PieChartModel();
+        relatorioClientes.forEach((resultado) -> {
+            graficoTiposClientes.set(resultado.getTipo(), resultado.getPercentual());
+        });
+        graficoTiposClientes.setTitle("Tipos de Clientes");
+        graficoTiposClientes.setLegendPosition("c");
+    }
+
+    private void criarGraficoSituacaoPropostas() {
+        graficoSituacaoPropostas = new HorizontalBarChartModel();
+
+        ChartSeries propostas = new ChartSeries();
+        propostas.setLabel("Situação");
+        relatorioPropostas.forEach((resultado) -> {
+            propostas.set(resultado.getTipo(), resultado.getPercentual());
+        });
+
+        graficoSituacaoPropostas.addSeries(propostas);
+        graficoSituacaoPropostas.setTitle("Visão Geral das Propostas");
+        graficoSituacaoPropostas.setLegendPosition("e");
+        graficoSituacaoPropostas.setStacked(true);
+
+        Axis xAxis = graficoSituacaoPropostas.getAxis(AxisType.X);
+        xAxis.setLabel("Percentual");
+
+        Axis yAxis = graficoSituacaoPropostas.getAxis(AxisType.Y);
+        yAxis.setLabel("Situação");
+    }
 
     public void init() {
         try {
@@ -32,70 +62,32 @@ public class HomeBean implements Serializable {
             ClienteDAO clienteDAO = new ClienteDAO();
             PropostaDAO propostaDAO = new PropostaDAO();
 
-            RelatorioClientesService serviceRelatorioClientes = new RelatorioClientesService();
-            RelatorioPropostasService serviceRelatorioPropostas = new RelatorioPropostasService();
+            ClientesRelatorio serviceRelatorioClientes = new ClientesRelatorio();
+            PropostasRelatorio serviceRelatorioPropostas = new PropostasRelatorio();
 
             relatorioClientes = serviceRelatorioClientes.processar(clienteDAO.buscar());
             relatorioPropostas = serviceRelatorioPropostas.processar(propostaDAO.buscar());
 
-            createPieModel();
-            createBarModel();
+            criarGraficoTiposClientes();
+            criarGraficoSituacaoPropostas();
         } catch (ErroSistema ex) {
             messageManager.adicionarErro(ex.getMessage());
         }
     }
 
-    public HorizontalBarChartModel getBarModel() {
-        return barModel;
+    public HorizontalBarChartModel getGraficoSituacaoPropostas() {
+        return graficoSituacaoPropostas;
     }
 
-    public PieChartModel getPieModel() {
-        return pieModel;
+    public PieChartModel getGraficoTiposClientes() {
+        return graficoTiposClientes;
     }
 
-    public List<RelatorioClientesService.Resultado> getRelatorioClientes() {
+    public List<ClientesRelatorio.Resultado> getRelatorioClientes() {
         return relatorioClientes;
     }
 
-    public void setRelatorioClientes(List<RelatorioClientesService.Resultado> relatorioClientes) {
-        this.relatorioClientes = relatorioClientes;
-    }
-    
-    public List<RelatorioPropostasService.Resultado> getRelatorioPropostas() {
+    public List<PropostasRelatorio.Resultado> getRelatorioPropostas() {
         return relatorioPropostas;
-    }
-
-    public void setRelatorioPropostas(List<RelatorioPropostasService.Resultado> relatorioPropostas) {
-        this.relatorioPropostas = relatorioPropostas;
-    }
-
-    private void createPieModel() {
-        pieModel = new PieChartModel();
-        relatorioClientes.forEach((resultado) -> {
-            pieModel.set(resultado.getTipo(), resultado.getPercentual());
-        });
-        pieModel.setTitle("Tipos de Clientes");
-        pieModel.setLegendPosition("c");
-    }
-
-    private void createBarModel() {
-        barModel = new HorizontalBarChartModel();
-        
-        ChartSeries propostas = new ChartSeries();
-        propostas.setLabel("Situação");
-        relatorioPropostas.forEach((resultado) -> {
-            propostas.set(resultado.getTipo(), resultado.getPercentual());
-        }); 
-
-        barModel.addSeries(propostas);
-        barModel.setTitle("Visão Geral das Propostas");
-        barModel.setLegendPosition("e");
-        barModel.setStacked(true);
-
-        Axis xAxis = barModel.getAxis(AxisType.X);
-        xAxis.setLabel("Percentual");
-
-        Axis yAxis = barModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Situação");
     }
 }

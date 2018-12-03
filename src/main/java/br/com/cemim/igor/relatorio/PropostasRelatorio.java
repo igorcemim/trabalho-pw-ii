@@ -1,4 +1,4 @@
-package br.com.cemim.igor.service;
+package br.com.cemim.igor.relatorio;
 
 import br.com.cemim.igor.entidade.Proposta;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class RelatorioPropostasService {
+public class PropostasRelatorio {
 
     public class Resultado {
 
