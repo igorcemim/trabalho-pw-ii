@@ -15,8 +15,10 @@
         <ui:param name="nomePagina"
             value="Clientes" />
         <ui:define name="content">
-            <h:form id="frm">
-                <p:messages autoUpdate="true"></p:messages>
+            <p:messages autoUpdate="true"></p:messages>
+
+            <h:form id="frm"
+                rendered='#{clienteBean.estado.equals("form")}'>
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Tipo"
                         for="frm-tipo" />
@@ -82,16 +84,24 @@
                             value="#{clienteBean.elemento.numeroCelular}" />
                     </p:row>
 
-                    <h:outputText />
                     <p:commandButton actionListener="#{clienteBean.salvar()}"
                         update="page-content"
                         value="Salvar" />
-
+                    <p:commandButton actionListener="#{clienteBean.cancelar()}"
+                        update="page-content"
+                        immediate="true"
+                        value="Cancelar" />
                 </p:panelGrid>
 
+                <br />
             </h:form>
-            <br />
             <h:form>
+
+                <p:commandButton actionListener="#{clienteBean.novo()}"
+                    update="page-content"
+                    value="Adicionar" />
+                <br />
+                <br />
 
                 <p:dataTable value="#{clienteBean.lista}"
                     var="cliente"
@@ -99,7 +109,7 @@
                     <p:column headerText="Ações">
                         <p:commandButton value="Editar"
                             action="#{clienteBean.editar(cliente)}"
-                            update="frm" />
+                            update="page-content" />
                         <p:commandButton value="Apagar"
                             action="#{clienteBean.apagar(cliente)}"
                             update="page-content" />

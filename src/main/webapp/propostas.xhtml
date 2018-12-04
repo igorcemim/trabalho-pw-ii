@@ -15,8 +15,9 @@
         <ui:param name="nomePagina"
             value="Propostas" />
         <ui:define name="content">
-            <h:form id="frm">
-                <p:messages autoUpdate="true"></p:messages>
+            <p:messages autoUpdate="true"></p:messages>
+            <h:form id="frm"
+                rendered='#{propostaBean.estado.equals("form")}'>
 
                 <p:panelGrid columns="2">
 
@@ -71,18 +72,26 @@
                         required="true"
                         label="Valor" />
 
-                    <h:outputText />
                     <p:commandButton actionListener="#{propostaBean.salvar()}"
                         update="page-content"
                         value="Salvar" />
+                    <p:commandButton actionListener="#{propostaBean.cancelar()}"
+                        update="page-content"
+                        immediate="true"
+                        value="Cancelar" />
 
                 </p:panelGrid>
-
+                <br />
             </h:form>
 
-            <br />
-
             <h:form>
+                <p:commandButton actionListener="#{propostaBean.novo()}"
+                    update="page-content"
+                    value="Adicionar" />
+
+                <br />
+                <br />
+
                 <p:dataTable value="#{propostaBean.lista}"
                     var="proposta"
                     emptyMessage="Nenhuma proposta cadastrada.">
@@ -90,7 +99,7 @@
                     <p:column headerText="Ações">
                         <p:commandButton value="Editar"
                             action="#{propostaBean.editar(proposta)}"
-                            update="frm" />
+                            update="page-content" />
                         <p:commandButton value="Apagar"
                             action="#{propostaBean.apagar(proposta)}"
                             update="page-content" />

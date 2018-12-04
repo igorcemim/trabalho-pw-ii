@@ -14,6 +14,8 @@ public abstract class CrudBean<E> {
 
     protected E elemento;
 
+    protected String estado = "lista";
+
     public void init() {
         try {
             dao = getDAO();
@@ -25,6 +27,10 @@ public abstract class CrudBean<E> {
     }
 
     public abstract DAO<E> getDAO();
+
+    public String getEstado() {
+        return this.estado;
+    }
 
     public E getElemento() {
         return elemento;
@@ -42,7 +48,13 @@ public abstract class CrudBean<E> {
         this.lista = lista;
     }
 
+    public void cancelar() {
+        this.elemento = dao.novo();
+        this.estado = "lista";
+    }
+
     public void editar(E elemento) {
+        this.estado = "form";
         this.elemento = elemento;
     }
 
@@ -70,11 +82,16 @@ public abstract class CrudBean<E> {
         }
     }
 
+    public void novo() {
+        this.estado = "form";
+    }
+
     public void salvar() {
         try {
             dao.salvar(elemento);
             elemento = dao.novo();
             MessageManager.getInstance().adicionarInfo("Registro salvo.");
+            this.estado = "listar";
             atualizar();
         } catch (ErroSistema ex) {
             MessageManager.getInstance().adicionarErro(ex.getMessage());
