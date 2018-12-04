@@ -20,8 +20,10 @@
 
                 <p:panelGrid columns="2">
 
-                    <h:outputLabel value="Cliente:" />
+                    <p:outputLabel value="Cliente:"
+                        for="frm-cliente" />
                     <p:selectOneMenu value="#{propostaBean.elemento.cliente.id}"
+                        id="frm-cliente"
                         required="true"
                         label="Cliente">
                         <f:selectItem itemLabel="Selecione"
@@ -32,8 +34,10 @@
                             itemLabel="#{cliente.nome}" />
                     </p:selectOneMenu>
 
-                    <h:outputLabel value="Situação" />
+                    <p:outputLabel value="Situação"
+                        for="frm-situacao" />
                     <p:selectOneMenu value="#{propostaBean.elemento.situacao}"
+                        id="frm-situacao"
                         required="true"
                         label="Situação">
                         <f:selectItem itemLabel="Selecione"
@@ -48,14 +52,18 @@
                             itemValue="Aceita" />
                     </p:selectOneMenu>
 
-                    <h:outputLabel value="Detalhes:" />
+                    <p:outputLabel value="Detalhes:"
+                        for="frm-detalhes" />
                     <p:inputText maxlength="50"
+                        id="frm-detalhes"
                         value="#{propostaBean.elemento.detalhes}"
                         required="true"
                         label="Detalhes" />
 
-                    <h:outputLabel value="Valor: " />
+                    <p:outputLabel value="Valor: "
+                        for="frm-valor" />
                     <p:inputNumber value="#{propostaBean.elemento.valor}"
+                        id="frm-valor"
                         symbol="R$ "
                         symbolPosition="p"
                         decimalSeparator=","

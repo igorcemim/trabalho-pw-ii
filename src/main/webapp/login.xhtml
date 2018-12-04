@@ -2,36 +2,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns = "http://www.w3.org/1999/xhtml"
-      xmlns:h = "http://java.sun.com/jsf/html"
-      xmlns:ui = "http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:body>
-        <ui:composition template = "template.xhtml">
-            <ui:param name="nomePagina" value="Login" />
-            <ui:define name="header">
-                <h1>Clientes e Propostas</h1>
-            </ui:define>
-            <ui:define name="content">
-                <h:form>
-                    <p:messages autoUpdate="true"></p:messages>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="template.xhtml">
+        <ui:param name="nomePagina"
+            value="Login" />
+        <ui:define name="header">
+            <h1>Clientes e Propostas</h1>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+                <p:messages autoUpdate="true"></p:messages>
 
-                    <p:panelGrid columns="2">
+                <p:panelGrid columns="2">
 
-                        <h:outputLabel value="Usuário:" />
-                        <p:inputText maxlength="50" value="#{loginBean.login}" />
+                    <p:outputLabel value="Usuário:"
+                        for="frm-usuario" />
+                    <p:inputText maxlength="50"
+                        value="#{loginBean.login}"
+                        required="true"
+                        label="Usuário"
+                        id="frm-usuario" />
 
-                        <h:outputLabel value="Senha:" />
-                        <p:password maxlength="50" value="#{loginBean.senha}" />
+                    <p:outputLabel value="Senha:"
+                        for="frm-senha" />
+                    <p:password maxlength="50"
+                        value="#{loginBean.senha}"
+                        required="true"
+                        label="Senha"
+                        id="frm-senha" />
 
-                        <h:outputText />
-                        <p:commandButton actionListener="#{loginBean.logar()}" update="@form" value="Entrar" />
+                    <h:outputText />
+                    <p:commandButton actionListener="#{loginBean.logar()}"
+                        update="@form"
+                        value="Entrar" />
 
-                    </p:panelGrid>
+                </p:panelGrid>
 
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
 </html>
