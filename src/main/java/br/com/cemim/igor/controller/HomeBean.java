@@ -24,7 +24,6 @@ public class HomeBean implements Serializable {
     private List<PropostasRelatorio.Resultado> relatorioPropostas;
     private PieChartModel graficoTiposClientes;
     private HorizontalBarChartModel graficoSituacaoPropostas;
-    private MessageManager messageManager;
 
     private void criarGraficoTiposClientes() {
         graficoTiposClientes = new PieChartModel();
@@ -58,7 +57,6 @@ public class HomeBean implements Serializable {
 
     public void init() {
         try {
-            messageManager = new MessageManager();
             ClienteDAO clienteDAO = new ClienteDAO();
             PropostaDAO propostaDAO = new PropostaDAO();
 
@@ -71,7 +69,7 @@ public class HomeBean implements Serializable {
             criarGraficoTiposClientes();
             criarGraficoSituacaoPropostas();
         } catch (ErroSistema ex) {
-            messageManager.adicionarErro(ex.getMessage());
+            MessageManager.getInstance().adicionarErro(ex.getMessage());
         }
     }
 

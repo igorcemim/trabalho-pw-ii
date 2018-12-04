@@ -10,6 +10,9 @@ public class MessageManager {
 
     private static MessageManager instance;
 
+    private MessageManager() {
+    }
+
     public static MessageManager getInstance() {
         if (instance == null) {
             instance = new MessageManager();

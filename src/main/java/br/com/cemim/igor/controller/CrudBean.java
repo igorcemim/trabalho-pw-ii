@@ -14,16 +14,13 @@ public abstract class CrudBean<E> {
 
     protected E elemento;
 
-    protected MessageManager messageManager;
-
     public void init() {
         try {
-            messageManager = new MessageManager();
             dao = getDAO();
             lista = dao.buscar();
             elemento = dao.novo();
         } catch (ErroSistema ex) {
-            messageManager.adicionarErro(ex.getMessage());
+            MessageManager.getInstance().adicionarErro(ex.getMessage());
         }
     }
 
@@ -53,20 +50,23 @@ public abstract class CrudBean<E> {
         try {
             lista = dao.buscar();
         } catch (ErroSistema ex) {
-            messageManager.adicionarErro(ex.getMessage());
+            MessageManager.getInstance().adicionarErro(ex.getMessage());
         }
     }
 
     public void apagar(E elemento) {
         try {
+            /**
+             * Se o elemento a ser apagado é o que está em edição no momento substituí ele.
+             */
             if (this.elemento.equals(elemento)) {
                 this.elemento = dao.novo();
             }
             dao.apagar(elemento);
-            messageManager.adicionarInfo("Registro apagado.");
+            MessageManager.getInstance().adicionarInfo("Registro apagado.");
             atualizar();
         } catch (ErroSistema ex) {
-            messageManager.adicionarErro(ex.getMessage());
+            MessageManager.getInstance().adicionarErro(ex.getMessage());
         }
     }
 
@@ -74,10 +74,10 @@ public abstract class CrudBean<E> {
         try {
             dao.salvar(elemento);
             elemento = dao.novo();
-            messageManager.adicionarInfo("Registro salvo.");
+            MessageManager.getInstance().adicionarInfo("Registro salvo.");
             atualizar();
         } catch (ErroSistema ex) {
-            messageManager.adicionarErro(ex.getMessage());
+            MessageManager.getInstance().adicionarErro(ex.getMessage());
         }
     }
 }
