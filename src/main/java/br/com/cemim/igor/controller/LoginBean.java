@@ -7,7 +7,6 @@ import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import br.com.cemim.igor.dao.DAO;
 import br.com.cemim.igor.dao.UsuarioDAO;
 import br.com.cemim.igor.entidade.Usuario;
 import br.com.cemim.igor.util.MessageManager;

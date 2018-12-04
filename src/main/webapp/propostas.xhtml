@@ -2,83 +2,112 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns = "http://www.w3.org/1999/xhtml"
-      xmlns:h = "http://java.sun.com/jsf/html"
-      xmlns:ui = "http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:metadata>
-        <f:viewAction action="#{propostaBean.init}" />
-    </f:metadata>
-    <h:body>
-        <ui:composition template = "template.xhtml">
-            <ui:param name="nomePagina" value="Propostas" />
-            <ui:define name="content">
-                <h:form>
-                    <p:messages autoUpdate="true"></p:messages>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+    <f:viewAction action="#{propostaBean.init}" />
+</f:metadata>
+<h:body>
+    <ui:composition template="template.xhtml">
+        <ui:param name="nomePagina"
+            value="Propostas" />
+        <ui:define name="content">
+            <h:form>
+                <p:messages autoUpdate="true"></p:messages>
 
-                    <p:panelGrid columns="2">
+                <p:panelGrid columns="2">
 
-                        <h:outputLabel value="Cliente:" />
-                        <p:selectOneMenu value="#{propostaBean.elemento.cliente.id}">
-                            <f:selectItem itemLabel="Selecione" itemValue="0" />
-                            <f:selectItems value="#{propostaBean.opcoesCliente}"
-                                           var="cliente"
-                                           itemValue="#{cliente.id}"
-                                           itemLabel="#{cliente.nome}" />
-                        </p:selectOneMenu>
+                    <h:outputLabel value="Cliente:" />
+                    <p:selectOneMenu value="#{propostaBean.elemento.cliente.id}"
+                        required="true"
+                        label="Cliente">
+                        <f:selectItem itemLabel="Selecione"
+                            itemValue="" />
+                        <f:selectItems value="#{propostaBean.opcoesCliente}"
+                            var="cliente"
+                            itemValue="#{cliente.id}"
+                            itemLabel="#{cliente.nome}" />
+                    </p:selectOneMenu>
 
-                        <h:outputLabel value="Situação" />
-                        <p:selectOneMenu value="#{propostaBean.elemento.situacao}">
-                            <f:selectItem itemLabel="Selecione" itemValue="" />
-                            <f:selectItem itemLabel="Enviada" itemValue="Enviada" />
-                            <f:selectItem itemLabel="Em negociação" itemValue="Em Negociação" />
-                            <f:selectItem itemLabel="Recusada" itemValue="Recusada" />
-                            <f:selectItem itemLabel="Aceita" itemValue="Aceita" />
-                        </p:selectOneMenu>
+                    <h:outputLabel value="Situação" />
+                    <p:selectOneMenu value="#{propostaBean.elemento.situacao}"
+                        required="true"
+                        label="Situação">
+                        <f:selectItem itemLabel="Selecione"
+                            itemValue="" />
+                        <f:selectItem itemLabel="Enviada"
+                            itemValue="Enviada" />
+                        <f:selectItem itemLabel="Em negociação"
+                            itemValue="Em Negociação" />
+                        <f:selectItem itemLabel="Recusada"
+                            itemValue="Recusada" />
+                        <f:selectItem itemLabel="Aceita"
+                            itemValue="Aceita" />
+                    </p:selectOneMenu>
 
-                        <h:outputLabel value="Detalhes:" />
-                        <p:inputText maxlength="50" value="#{propostaBean.elemento.detalhes}" />
+                    <h:outputLabel value="Detalhes:" />
+                    <p:inputText maxlength="50"
+                        value="#{propostaBean.elemento.detalhes}"
+                        required="true"
+                        label="Detalhes" />
 
-                        <h:outputLabel value="Valor: " />
-                        <p:inputNumber value="#{propostaBean.elemento.valor}"
-                                       symbol="R$ "
-                                       symbolPosition="p"
-                                       decimalSeparator=","
-                                       thousandSeparator="." />
+                    <h:outputLabel value="Valor: " />
+                    <p:inputNumber value="#{propostaBean.elemento.valor}"
+                        symbol="R$ "
+                        symbolPosition="p"
+                        decimalSeparator=","
+                        thousandSeparator="."
+                        required="true"
+                        label="Valor" />
 
-                        <h:outputText />
-                        <p:commandButton actionListener="#{propostaBean.salvar()}" update="@form" value="Salvar" />
+                    <h:outputText />
+                    <p:commandButton actionListener="#{propostaBean.salvar()}"
+                        update="@form"
+                        value="Salvar" />
 
-                    </p:panelGrid>
+                </p:panelGrid>
 
-                    <br />
+                <br />
 
-                    <p:dataTable value="#{propostaBean.lista}" var="proposta" emptyMessage="Nenhuma proposta cadastrada.">
+                <p:dataTable value="#{propostaBean.lista}"
+                    var="proposta"
+                    emptyMessage="Nenhuma proposta cadastrada.">
 
-                        <p:column headerText="Ações">
-                            <p:commandButton value="Editar" action="#{propostaBean.editar(proposta)}" update="@form" />
-                            <p:commandButton value="Apagar" action="#{propostaBean.apagar(proposta)}" update="@form" />
-                        </p:column>
+                    <p:column headerText="Ações">
+                        <p:commandButton value="Editar"
+                            action="#{propostaBean.editar(proposta)}"
+                            update="@form" />
+                        <p:commandButton value="Apagar"
+                            action="#{propostaBean.apagar(proposta)}"
+                            update="@form" />
+                    </p:column>
 
-                        <p:column headerText="Cliente" sortBy="#{proposta.cliente.nome}">
-                            <h:outputText value="#{proposta.cliente.nome}"></h:outputText>
-                        </p:column>
+                    <p:column headerText="Cliente"
+                        sortBy="#{proposta.cliente.nome}">
+                        <h:outputText value="#{proposta.cliente.nome}"></h:outputText>
+                    </p:column>
 
-                        <p:column headerText="Situação" sortBy="#{proposta.situacao}">
-                            <h:outputText value="#{proposta.situacao}"></h:outputText>
-                        </p:column>
+                    <p:column headerText="Situação"
+                        sortBy="#{proposta.situacao}">
+                        <h:outputText value="#{proposta.situacao}"></h:outputText>
+                    </p:column>
 
-                        <p:column headerText="Valor" sortBy="#{proposta.valor}">
-                            <h:outputText value="#{proposta.valor}">
-                                <f:convertNumber type="currency" locale="pt_BR" />
-                            </h:outputText>
-                        </p:column>
+                    <p:column headerText="Valor"
+                        sortBy="#{proposta.valor}">
+                        <h:outputText value="#{proposta.valor}">
+                            <f:convertNumber type="currency"
+                                locale="pt_BR" />
+                        </h:outputText>
+                    </p:column>
 
-                    </p:dataTable>
+                </p:dataTable>
 
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
 </html>
