@@ -7,15 +7,14 @@ public class SessionManager {
 
     private static SessionManager instance;
 
+    private SessionManager() {
+    }
+
     public static SessionManager getInstance() {
         if (instance == null) {
             instance = new SessionManager();
         }
-
         return instance;
-    }
-
-    private SessionManager() {
     }
 
     private ExternalContext currentExternalContext() {

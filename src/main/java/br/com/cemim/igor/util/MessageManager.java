@@ -8,6 +8,15 @@ import javax.faces.context.FacesContext;
 
 public class MessageManager {
 
+    private static MessageManager instance;
+
+    public static MessageManager getInstance() {
+        if (instance == null) {
+            instance = new MessageManager();
+        }
+        return instance;
+    }
+
     public void adicionarInfo(String mensagem) {
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem, null);
         FacesContext.getCurrentInstance().addMessage(null, fm);
