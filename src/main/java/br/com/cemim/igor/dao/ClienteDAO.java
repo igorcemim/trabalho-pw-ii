@@ -14,6 +14,7 @@ public class ClienteDAO extends CrudDAO<Cliente> implements Serializable {
         return new Cliente();
     }
 
+    @Override
     public Class<Cliente> getEntidade() {
         return Cliente.class;
     }
@@ -25,6 +26,7 @@ public class ClienteDAO extends CrudDAO<Cliente> implements Serializable {
         return (long) query.getSingleResult();
     }
 
+    @Override
     public void apagar(Cliente elemento) throws ErroSistema {
         if (quantidadePropostasVinculadas(elemento) > 0) {
             throw new ErroSistema("Não é possível apagar o cliente. Existem propostas vinculadas.");

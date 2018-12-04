@@ -13,7 +13,7 @@ public abstract class CrudBean<E> {
     protected DAO<E> dao;
 
     protected E elemento;
-    
+
     protected MessageManager messageManager;
 
     public void init() {

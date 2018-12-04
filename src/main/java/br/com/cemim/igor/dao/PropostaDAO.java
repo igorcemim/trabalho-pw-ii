@@ -11,6 +11,7 @@ public class PropostaDAO extends CrudDAO<Proposta> implements Serializable {
         return new Proposta();
     }
 
+    @Override
     public Class<Proposta> getEntidade() {
         return Proposta.class;
     }

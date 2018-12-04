@@ -28,6 +28,7 @@ abstract public class CrudDAO<T> implements DAO<T> {
 
     protected abstract Class<T> getEntidade();
 
+    @Override
     public T salvar(T elemento) throws ErroSistema {
         try {
             em = getEm();
@@ -42,6 +43,7 @@ abstract public class CrudDAO<T> implements DAO<T> {
         }
     }
 
+    @Override
     public void apagar(T elemento) throws ErroSistema {
         try {
             em = getEm();
@@ -56,6 +58,7 @@ abstract public class CrudDAO<T> implements DAO<T> {
         }
     }
 
+    @Override
     public List<T> buscar() throws ErroSistema {
         try {
             em = getEm();
@@ -68,6 +71,7 @@ abstract public class CrudDAO<T> implements DAO<T> {
         }
     }
 
+    @Override
     public T buscarPorCodigo(int codigo) throws ErroSistema {
         try {
             em = getEm();
