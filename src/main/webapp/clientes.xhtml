@@ -15,7 +15,7 @@
         <ui:param name="nomePagina"
             value="Clientes" />
         <ui:define name="content">
-            <h:form>
+            <h:form id="frm">
                 <p:messages autoUpdate="true"></p:messages>
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Tipo"
@@ -38,21 +38,24 @@
                         required="true"
                         label="Nome" />
 
-                    <p:outputLabel value="E-mail:" for="frm-email" />
+                    <p:outputLabel value="E-mail:"
+                        for="frm-email" />
                     <p:inputText maxlength="50"
                         id="frm-email"
                         value="#{clienteBean.elemento.email}"
                         required="true"
                         label="E-mail" />
 
-                    <p:outputLabel value="Endereço:" for="frm-endereco" />
+                    <p:outputLabel value="Endereço:"
+                        for="frm-endereco" />
                     <p:inputText maxlength="80"
                         id="frm-endereco"
                         value="#{clienteBean.elemento.endereco}"
                         required="true"
                         label="Endereço" />
 
-                    <p:outputLabel value="Telefone:" for="frm-telefone" />
+                    <p:outputLabel value="Telefone:"
+                        for="frm-telefone" />
                     <p:row>
                         <p:inputText maxlength="2"
                             id="frm-telefone"
@@ -67,7 +70,8 @@
                             label="Telefone" />
                     </p:row>
 
-                    <p:outputLabel value="Celular" for="frm-celular" />
+                    <p:outputLabel value="Celular"
+                        for="frm-celular" />
                     <p:row>
                         <p:inputText maxlength="2"
                             id="frm-celular"
@@ -80,12 +84,14 @@
 
                     <h:outputText />
                     <p:commandButton actionListener="#{clienteBean.salvar()}"
-                        update="@form"
+                        update="page-content"
                         value="Salvar" />
 
                 </p:panelGrid>
 
-                <br />
+            </h:form>
+            <br />
+            <h:form>
 
                 <p:dataTable value="#{clienteBean.lista}"
                     var="cliente"
@@ -93,10 +99,10 @@
                     <p:column headerText="Ações">
                         <p:commandButton value="Editar"
                             action="#{clienteBean.editar(cliente)}"
-                            update="@form" />
+                            update="frm" />
                         <p:commandButton value="Apagar"
                             action="#{clienteBean.apagar(cliente)}"
-                            update="@form" />
+                            update="page-content" />
                     </p:column>
 
                     <p:column headerText="Tipo"
@@ -114,8 +120,8 @@
                         <h:outputText value="#{cliente.email}"></h:outputText>
                     </p:column>
                 </p:dataTable>
-
             </h:form>
+
         </ui:define>
     </ui:composition>
 </h:body>

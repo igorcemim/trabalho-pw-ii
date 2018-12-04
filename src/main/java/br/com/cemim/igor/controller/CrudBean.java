@@ -59,6 +59,9 @@ public abstract class CrudBean<E> {
 
     public void apagar(E elemento) {
         try {
+            if (this.elemento.equals(elemento)) {
+                this.elemento = dao.novo();
+            }
             dao.apagar(elemento);
             messageManager.adicionarInfo("Registro apagado.");
             atualizar();
