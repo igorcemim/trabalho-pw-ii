@@ -35,9 +35,13 @@ public class AuthorizationListener implements PhaseListener {
         String loginPath = "/login.xhtml";
         String indexPath = "/index.xhtml";
 
-        System.out.println(facesContext.getViewRoot().getViewId());
-
+        /**
+         * Se tentar acessar a URL de login, mas o usuário já está logado.
+         */
         if (isPaginaLogin(facesContext) && isUsuarioLogado()) {
+            /**
+             * Redireciona para a "home" do sistema.
+             */
             try {
                 externalContext.redirect(basePath + indexPath);
             } catch (IOException e) {
@@ -46,11 +50,20 @@ public class AuthorizationListener implements PhaseListener {
             return;
         }
 
+        /**
+         * Se já está logado não executa o restante das verificações.
+         */
         if (isUsuarioLogado()) {
             return;
         }
 
+        /**
+         * Se está tentando acessar uma página protegida e não está logado.
+         */
         if (!isPaginaLogin(facesContext) && !isUsuarioLogado()) {
+            /**
+             * Redireciona para a página de login.
+             */
             try {
                 externalContext.redirect(basePath + loginPath);
             } catch (IOException e) {
