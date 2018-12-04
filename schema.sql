@@ -31,3 +31,5 @@ CREATE TABLE usuario (
     senha varchar(64) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+INSERT INTO usuario values(null, 'admin', sha2('admin+3d1880b3b11836cabb66afa7f275789d9b659f70ca1266781653647ac1642248', 256));
