@@ -6,7 +6,7 @@
 
 ### Instalação
 - Criar um banco de dados com o nome ```sistema_pwii```.
-- Executar o script ```schema.sql``` para criação das tabelas.
+- Executar o script ```schema.sql``` para criação das tabelas e inserção dos dados.
 - Alterar as credenciais do banco de dados no arquivo ```persistence.xml```, caso necessário.
 
 ### Como executar
@@ -19,4 +19,10 @@ As dependências necessárias serão baixadas e o projeto será executado em um 
 Após executar o projeto é possível acessar a aplicação pela seguinte URL:
 ```
 http://localhost:9595/trabalho-pw-ii
+```
+
+### Login
+```
+Usuário: admin
+Senha: admin
 ```
